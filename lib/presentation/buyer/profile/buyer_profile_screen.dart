@@ -15,7 +15,6 @@ class _BuyerProfileScreenState extends State<BuyerProfileScreen> {
   @override
   void initState() {
     super.initState();
-    // Ambil profil pembeli saat halaman dimuat
     context.read<ProfileBuyerBloc>().add(GetProfileBuyerEvent());
   }
 
@@ -45,7 +44,7 @@ class _BuyerProfileScreenState extends State<BuyerProfileScreen> {
             }
 
             // Default ke form jika tidak ada data atau error
-            return ProfileBuyerForm();
+            return ProfileBuyerInputForm();
           },
         ),
       ),
