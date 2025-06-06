@@ -1,16 +1,5 @@
-# canary_app
-
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+[LOGIN]
+![Screenshot_1749227385](https://github.com/user-attachments/assets/cb1802d1-89cf-4817-8dec-c0f9a8080c65)
+[PROFILE]
+![Screenshot_1749227641](https://github.com/user-attachments/assets/bd32477d-43d0-43de-a598-b06d9fc0c5b3)
+![Screenshot_1749227804](https://github.com/user-attachments/assets/358fe397-6912-41f0-8c66-2effa2759123)
