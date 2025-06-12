@@ -3,8 +3,8 @@ import 'package:canary_app/core/components/spaces.dart';
 import 'package:canary_app/core/constants/colors.dart';
 import 'package:canary_app/core/core.dart';
 import 'package:canary_app/data/model/request/auth/register_request_model.dart';
+import 'package:canary_app/presentation/auth/bloc/register/bloc/register_bloc.dart';
 import 'package:canary_app/presentation/auth/login_screen.dart';
-import 'package:canary_app/presentation/register/bloc/register_bloc.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -17,12 +17,28 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
-
   late final TextEditingController namaController;
   late final TextEditingController emailController;
   late final TextEditingController passwordController;
   late final GlobalKey<FormState> _key;
   bool isShowPassword = false;
+
+  @override
+  void initState() {
+    namaController = TextEditingController();
+    emailController = TextEditingController();
+    passwordController = TextEditingController();
+    _key = GlobalKey<FormState>();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    _key.currentState?.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,35 +53,32 @@ class _RegisterScreenState extends State<RegisterScreen> {
               children: [
                 const SpaceHeight(100),
                 Text(
-                  'Daftar Akun Baru',
+                  'DAFTAR AKUN BARU',
                   style: TextStyle(
                     fontSize: MediaQuery.of(context).size.width * 0.05,
-                    fontWeight: FontWeight.bold
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
-
                 const SpaceHeight(30),
                 CustomTextField(
-                  controller: namaController, 
-                  label: 'Username', 
                   validator: 'Username tidak boleh kosong',
+                  controller: namaController,
+                  label: 'Username',
                   prefixIcon: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Icon(Icons.person),
                   ),
                 ),
-
                 const SpaceHeight(25),
                 CustomTextField(
-                  controller: emailController, 
-                  label: 'Email', 
                   validator: 'Email tidak boleh kosong',
+                  controller: emailController,
+                  label: 'Email',
                   prefixIcon: Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Icon(Icons.email), 
+                    child: Icon(Icons.email),
                   ),
                 ),
-                
                 const SpaceHeight(25),
                 Row(
                   spacing: 10,
@@ -97,7 +110,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                   ],
                 ),
-
                 const SpaceHeight(50),
                 BlocConsumer<RegisterBloc, RegisterState>(
                   listener: (context, state) {
@@ -141,7 +153,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     );
                   },
                 ),
-
                 const SpaceHeight(20),
                 Text.rich(
                   TextSpan(

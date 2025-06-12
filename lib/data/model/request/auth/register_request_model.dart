@@ -5,14 +5,12 @@ class RegisterRequestModel {
     final String? email;
     final String? password;
     final String? passwordConfirmation;
-    final int? roleId;
 
     RegisterRequestModel({
         this.username,
         this.email,
         this.password,
         this.passwordConfirmation,
-        this.roleId,
     });
 
     factory RegisterRequestModel.fromJson(String str) => RegisterRequestModel.fromMap(json.decode(str));
@@ -24,7 +22,6 @@ class RegisterRequestModel {
         email: json["email"],
         password: json["password"],
         passwordConfirmation: json["password_confirmation"],
-        roleId: json["role_id"],
     );
 
     Map<String, dynamic> toMap() => {
@@ -32,6 +29,5 @@ class RegisterRequestModel {
         "email": email,
         "password": password,
         "password_confirmation": passwordConfirmation,
-        "role_id": roleId,
     };
 }

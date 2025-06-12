@@ -1,10 +1,10 @@
 import 'dart:convert';
 
 class BuyerRequestModel {
-    final String? name;
-    final String? address;
-    final String? phone;
-    final dynamic photo;
+    String? name;
+    String? address;
+    String? phone;
+    String? photo;
 
     BuyerRequestModel({
         this.name,

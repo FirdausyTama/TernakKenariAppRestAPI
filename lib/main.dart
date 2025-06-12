@@ -1,13 +1,13 @@
 import 'package:canary_app/data/repository/auth_repository.dart';
 import 'package:canary_app/data/repository/get_all_burung_tersedia_repository.dart';
 import 'package:canary_app/data/repository/profile_buyer_repository.dart';
-import 'package:canary_app/presentation/auth/bloc/login_bloc.dart';
+import 'package:canary_app/presentation/auth/bloc/login/login_bloc.dart';
 
 import 'package:canary_app/presentation/auth/login_screen.dart';
 import 'package:canary_app/presentation/bloc/get_burung_tersedia_bloc.dart';
 
 import 'package:canary_app/presentation/buyer/profile/bloc/profile_buyer_bloc.dart';
-import 'package:canary_app/presentation/register/bloc/register_bloc.dart';
+import 'package:canary_app/presentation/auth/bloc/register/bloc/register_bloc.dart';
 import 'package:canary_app/services/service_http_client.dart';
 
 import 'package:flutter/material.dart';

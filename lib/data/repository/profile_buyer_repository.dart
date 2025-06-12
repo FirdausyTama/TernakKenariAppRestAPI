@@ -1,5 +1,6 @@
 
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:canary_app/data/model/request/buyer/buyer_profile_request_model.dart';
 import 'package:canary_app/data/model/response/buyer/buyer_profile_response_model.dart';
@@ -18,6 +19,8 @@ class ProfileBuyerRepository {
         "buyer/profile",
         requestModel.toMap(),
       );
+
+      log(response.statusCode.toString());
 
       if (response.statusCode == 201) {
         final jsonResponse = json.decode(response.body);

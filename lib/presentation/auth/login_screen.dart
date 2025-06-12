@@ -3,7 +3,7 @@ import 'package:canary_app/core/components/spaces.dart';
 import 'package:canary_app/core/constants/colors.dart';
 import 'package:canary_app/core/core.dart';
 import 'package:canary_app/data/model/request/auth/login_request_model.dart';
-import 'package:canary_app/presentation/auth/bloc/login_bloc.dart';
+import 'package:canary_app/presentation/auth/bloc/login/login_bloc.dart';
 import 'package:canary_app/presentation/auth/register_screen.dart';
 import 'package:canary_app/presentation/buyer/profile/buyer_profile_screen.dart';
 import 'package:flutter/gestures.dart';
@@ -52,23 +52,22 @@ class _LoginScreenState extends State<LoginScreen> {
               children: [
                 const SpaceHeight(170),
                 Text(
-                  'Selamat Datang Kembali',
+                  'SELAMAT DATANG KEMBALI',
                   style: TextStyle(
                     fontSize: MediaQuery.of(context).size.width * 0.05,
-                    fontWeight: FontWeight.bold
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
                 const SpaceHeight(30),
                 CustomTextField(
-                  validator: "Email tidak boleh kosong",
-                  controller: emailController, 
-                  label: 'Email', 
+                  validator: 'Email tidak boleh kosong',
+                  controller: emailController,
+                  label: 'Email',
                   prefixIcon: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Icon(Icons.email),
                   ),
                 ),
-
                 const SpaceHeight(25),
                 CustomTextField(
                   validator: 'Password tidak boleh kosong',
@@ -91,28 +90,28 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                 ),
-
                 const SpaceHeight(30),
                 BlocConsumer<LoginBloc, LoginState>(
                   listener: (context, state) {
                     if (state is LoginFailure) {
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(state.error)));
+                      ScaffoldMessenger.of(
+                        context,
+                      ).showSnackBar(SnackBar(content: Text(state.error)));
                     } else if (state is LoginSuccess) {
                       final role = state.responseModel.user?.role
-                        ?.toLowerCase();
-
+                          ?.toLowerCase();
                       if (role == 'admin') {
-                        // context.pushAndRemoveUntil(
-                        //   const AdminConfirmScreen(),
-                        //   (route) => false,
-                        // );
+                        //context.pushAndRemoveUntil(
+                        //  const AdminConfirmScreen(),
+                        //  (route) => false,
+                        //);
                       } else if (role == 'buyer') {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(content: Text(state.responseModel.message!)),
                         );
                         context.pushAndRemoveUntil(
-                          const BuyerProfileScreen(), 
-                          (route) => false
+                          const BuyerProfileScreen(),
+                          (route) => false,
                         );
                       } else {
                         ScaffoldMessenger.of(context).showSnackBar(
@@ -121,23 +120,22 @@ class _LoginScreenState extends State<LoginScreen> {
                       }
                     }
                   },
-
                   builder: (context, state) {
                     return Button.filled(
-                      onPressed: state is LogInLoading
+                      onPressed: state is LoginLoading
                           ? null
                           : () {
                               if (_key.currentState!.validate()) {
                                 final request = LoginRequestModel(
                                   email: emailController.text,
-                                  password: passwordController.text
+                                  password: passwordController.text,
                                 );
                                 context.read<LoginBloc>().add(
                                   LoginRequested(requestModel: request),
                                 );
                               }
-                          },
-                      label: state is LogInLoading ? 'memuat...' : 'Masuk',
+                            },
+                      label: state is LoginLoading ? 'Memuat...' : 'Masuk',
                     );
                   },
                 ),
@@ -145,26 +143,26 @@ class _LoginScreenState extends State<LoginScreen> {
                 const SpaceHeight(20),
                 Text.rich(
                   TextSpan(
-                    text: "Belum punya akun?? Silahkan ",
+                    text: 'Belum memiliki akun? Silahkan ',
                     style: TextStyle(
                       color: AppColors.grey,
                       fontSize: MediaQuery.of(context).size.width * 0.03,
                     ),
                     children: [
                       TextSpan(
-                        text: 'Daftar Disini!!',
+                        text: 'Daftar disini!',
                         style: TextStyle(color: AppColors.primary),
                         recognizer: TapGestureRecognizer()
                           ..onTap = () {
                             context.push(const RegisterScreen());
-                          }
-                      )
-                    ]
-                  )
-                )
+                          },
+                      ),
+                    ],
+                  ),
+                ),
               ],
             ),
-          )
+          ),
         ),
       ),
     );

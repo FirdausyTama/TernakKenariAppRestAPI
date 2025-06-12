@@ -2,16 +2,18 @@ import 'package:bloc/bloc.dart';
 import 'package:canary_app/data/model/request/auth/register_request_model.dart';
 import 'package:canary_app/data/repository/auth_repository.dart';
 
+
+
 part 'register_event.dart';
 part 'register_state.dart';
 
 class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
   final AuthRepository authRepository;
   RegisterBloc({required this.authRepository}) : super(RegisterInitial()) {
-    on<RegisterRequested>(_onRegisterRequired);
+    on<RegisterRequested>(_onRegisterRequested);
   }
 
-  Future<void> _onRegisterRequired(
+  Future<void> _onRegisterRequested(
     RegisterRequested event,
     Emitter<RegisterState> emit,
   ) async {
@@ -21,7 +23,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
 
     result.fold(
       (l) => emit(RegisterFailure(error: l)),
-      (r) => emit(RegisterSuccess(message: r)),
+      (r) => emit(RegisterSuccess(message:  r)),
     );
   }
 }
